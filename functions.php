@@ -11,3 +11,4 @@ if (!function_exists('redirect_theme_register_nav_menus')) {
 }
 add_action('init', 'redirect_theme_register_nav_menus');
 
+add_theme_support('post-thumbnails');
