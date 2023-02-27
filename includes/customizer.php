@@ -3,22 +3,22 @@
 if (!function_exists('redirect_theme_customize_register')) {
     function redirect_theme_customize_register($wp_customize)
     {
-        $wp_customize->add_setting('redirect_theme_redirect_url', array(
-            'default' => 'https://example.com',
-            'transport' => 'refresh',
-        ));
-
-        $wp_customize->add_control('redirect_theme_redirect_url', array(
-            'label' => __('Redirect URL', 'redirect-theme'),
-            'section' => 'redirect_theme_redirect',
-            'type' => 'text',
-        ));
-
         $wp_customize->add_section('redirect_theme_redirect', array(
             'title' => __('Redirect', 'redirect-theme'),
             'priority' => 30,
         ));
 
+        redirect_theme_redirect_enabled();
+
+        redirect_theme_redirect_url();
+
+        redirect_theme_status_code();
+    }
+};
+
+if (!function_exists('redirect_theme_redirect_enabled')) {
+    function redirect_theme_redirect_enabled()
+    {
         $wp_customize->add_setting('redirect_theme_redirect_enabled', array(
             'default' => false,
             'transport' => 'refresh',
@@ -29,7 +29,28 @@ if (!function_exists('redirect_theme_customize_register')) {
             'section' => 'redirect_theme_redirect',
             'type' => 'checkbox',
         ));
+    }
+}
 
+if (!function_exists('redirect_theme_redirect_url')) {
+    function redirect_theme_redirect_url()
+    {
+        $wp_customize->add_setting('redirect_theme_redirect_url', array(
+            'default' => 'https://example.com',
+            'transport' => 'refresh',
+        ));
+
+        $wp_customize->add_control('redirect_theme_redirect_url', array(
+            'label' => __('Redirect URL', 'redirect-theme'),
+            'section' => 'redirect_theme_redirect',
+            'type' => 'text',
+        ));
+    }
+}
+
+if (!function_exists('redirect_theme_status_code')) {
+    function redirect_theme_status_code()
+    {
         $wp_customize->add_setting('redirect_theme_redirect_status_code', array(
             'default' => 301,
             'transport' => 'refresh',
@@ -48,4 +69,4 @@ if (!function_exists('redirect_theme_customize_register')) {
             ],
         ));
     }
-};
+}
